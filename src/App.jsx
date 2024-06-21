@@ -9,8 +9,8 @@ function App() {
 
   function handleSelectSquare(i, j) {
     setGameTurns((turns) => [
-      ...turns,
       { player: currentPlayer, square: { row: i, col: j } },
+      ...turns,
     ]);
     setCurrentPlayer((player) => (player === "X" ? "O" : "X"));
   }
