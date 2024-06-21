@@ -1,17 +1,22 @@
-import { useState } from "react";
+const initialBoard = [
+  [null, null, null],
+  [null, null, null],
+  [null, null, null],
+];
 
-export default function GameBoard({ onSquareClick, currentPlayer }) {
-  const [board, setBoard] = useState(Array(3).fill(Array(3).fill(null)));
+export default function GameBoard({ onSquareClick, turns }) {
+  let board = initialBoard;
+  if (turns.length > 0) {
+    turns.forEach((turn) => {
+      const [i, j] = [turn.square.row, turn.square.col];
+      board[i][j] = turn.player;
+    });
+  }
 
   function handleClick(i, j) {
     if (board[i][j] !== null) {
       return;
     }
-    setBoard((prevBoard) => {
-      const newBoard = prevBoard.map((row) => [...row]);
-      newBoard[i][j] = currentPlayer;
-      return newBoard;
-    });
 
     onSquareClick(i, j);
   }
