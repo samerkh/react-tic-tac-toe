@@ -13,14 +13,6 @@ export default function GameBoard({ onSquareClick, turns }) {
     });
   }
 
-  function handleClick(i, j) {
-    if (board[i][j] !== null) {
-      return;
-    }
-
-    onSquareClick(i, j);
-  }
-
   return (
     <ol id="game-board">
       {board.map((row, i) => (
@@ -28,7 +20,12 @@ export default function GameBoard({ onSquareClick, turns }) {
           <ol>
             {row.map((col, j) => (
               <li key={j}>
-                <button onClick={() => handleClick(i, j)}>{board[i][j]}</button>
+                <button
+                  onClick={() => onSquareClick(i, j)}
+                  disabled={board[i][j] !== null}
+                >
+                  {board[i][j]}
+                </button>
               </li>
             ))}
           </ol>
