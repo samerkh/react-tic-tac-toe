@@ -4,15 +4,15 @@ import Log from "./components/Log/Log";
 import Player from "./components/Player/Player";
 
 function App() {
-  const [currentPlayer, setCurrentPlayer] = useState("X");
   const [gameTurns, setGameTurns] = useState([]);
+
+  const currentPlayer = gameTurns.length % 2 === 0 ? "X" : "O";
 
   function handleSelectSquare(i, j) {
     setGameTurns((turns) => [
       { player: currentPlayer, square: { row: i, col: j } },
       ...turns,
     ]);
-    setCurrentPlayer((player) => (player === "X" ? "O" : "X"));
   }
 
   return (
